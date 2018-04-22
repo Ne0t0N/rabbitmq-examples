@@ -23,6 +23,9 @@ public final class PropertiesUtils {
         }
     }
 
+    private PropertiesUtils() {
+    }
+
     public static Properties getProperties() {
         return properties;
     }

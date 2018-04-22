@@ -6,7 +6,6 @@ import com.rabbitmq.client.ConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.Properties;
 
 public final class RabbitMqUtils {
@@ -16,36 +15,33 @@ public final class RabbitMqUtils {
     private static final String RABBITMQ_PORT;
     private static final ConnectionFactory CONNECTION_FACTORY = new ConnectionFactory();
 
+    private static Connection connection;
+
     static {
         Properties properties = PropertiesUtils.getProperties();
         RABBITMQ_HOST = properties.getProperty("rabbitmq.host");
         RABBITMQ_PORT = properties.getProperty("rabbitmq.port");
 
         CONNECTION_FACTORY.setHost(RABBITMQ_HOST);
+        CONNECTION_FACTORY.setPort(Integer.valueOf(RABBITMQ_PORT));
     }
 
     private RabbitMqUtils() {
     }
 
-    public static Connection connect() {
+    public static Channel createChannel() {
         try {
-            return CONNECTION_FACTORY.newConnection();
-        } catch (Exception e) {
-            LOG.error("Connection to '{}:{}' could not be established", RABBITMQ_HOST, RABBITMQ_PORT, e);
-            return null;
-        }
-    }
-
-    public static Channel createChannel(Connection connection) {
-        try {
+            if (connection == null || !connection.isOpen()) {
+                connection = CONNECTION_FACTORY.newConnection();
+            }
             return connection.createChannel();
-        } catch (IOException e) {
-            LOG.error("Could not create channel for connection '{}'", connection, e);
+        } catch (Exception e) {
+            LOG.error("Could not create channel for connection '{}', socket '{}:{}'", connection, RABBITMQ_HOST, RABBITMQ_PORT, e);
             return null;
         }
     }
 
-    public static void close(Connection connection, Channel channel) {
+    public static void close(Channel channel) {
         try {
             if (channel.isOpen()) {
                 channel.close();
