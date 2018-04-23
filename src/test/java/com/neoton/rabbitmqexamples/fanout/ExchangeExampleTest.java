@@ -18,6 +18,11 @@ public class ExchangeExampleTest extends ExchangeExampleTestBase {
         testExchange(new DirectExchangeExample());
     }
 
+    @Test
+    public void topicExchange_whenMessageSent_shouldBeConsumed() {
+        testExchange(new TopicExchangeExample());
+    }
+
     private static void testExchange(ExchangeExample exchangeExample) {
         exchangeExample.produce(SAMPLE_MESSAGE);
         assertThat(exchangeExample.consume()).isEqualTo(SAMPLE_MESSAGE);

@@ -16,7 +16,7 @@ public class ExchangeExampleTestBase {
     @BeforeClass
     public static void setUpClass() throws IOException, InterruptedException {
         Runtime.getRuntime().exec(String.format("docker-compose -f %s up -d", DOCKER_FILE));
-        LOG.info("RabbitMQ docker container started");
+        LOG.info("RabbitMQ docker container starting...");
         awaitMqStarted();
         LOG.info("RabbitMQ operational");
     }
@@ -24,7 +24,7 @@ public class ExchangeExampleTestBase {
     @AfterClass
     public static void tearDownClass() throws IOException, InterruptedException {
         Runtime.getRuntime().exec(String.format("docker-compose -f %s down -v --remove-orphans", DOCKER_FILE));
-        LOG.info("RabbitMQ docker container stopped");
+        LOG.info("RabbitMQ docker container stopping...");
         awaitMqStopped();
         LOG.info("RabbitMQ shutdown");
     }
