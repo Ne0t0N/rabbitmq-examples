@@ -33,11 +33,8 @@ public class SingleDeliveryConsumer extends DefaultConsumer {
         LOG.info("Received message '{}' with consumerType '{}' from exchange '{}'", message, consumerTag, envelope.getExchange());
     }
 
-    public void await(long timeout, TimeUnit timeoutUnit) throws InterruptedException {
+    public String awaitResult(long timeout, TimeUnit timeoutUnit) throws InterruptedException {
         countDownLatch.await(timeout, timeoutUnit);
-    }
-
-    public String getResult() {
         return result.get();
     }
 }

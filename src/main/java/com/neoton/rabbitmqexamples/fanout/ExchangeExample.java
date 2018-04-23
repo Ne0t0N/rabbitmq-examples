@@ -1,4 +1,4 @@
-package com.neoton.rabbitmqexamples;
+package com.neoton.rabbitmqexamples.fanout;
 
 public interface ExchangeExample {
 

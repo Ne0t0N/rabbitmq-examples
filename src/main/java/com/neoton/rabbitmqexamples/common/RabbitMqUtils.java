@@ -53,4 +53,12 @@ public final class RabbitMqUtils {
             LOG.error("Could not properly close connection/channel, still open ({}/{})", connection.isOpen(), channel.isOpen(), e);
         }
     }
+
+    public static boolean isMqReachable() {
+        try (Connection connection = CONNECTION_FACTORY.newConnection()) {
+            return connection.isOpen();
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
