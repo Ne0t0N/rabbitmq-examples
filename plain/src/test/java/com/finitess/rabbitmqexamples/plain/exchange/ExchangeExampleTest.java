@@ -1,7 +1,7 @@
-package com.finitess.rabbitmqexamples.fanout;
+package com.finitess.rabbitmqexamples.plain.exchange;
 
 
-import com.finitess.rabbitmqexamples.common.ChannelProvider;
+import com.finitess.rabbitmqexamples.plain.common.ChannelProvider;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.RabbitMQContainer;

@@ -1,6 +1,6 @@
-package com.finitess.rabbitmqexamples.fanout;
+package com.finitess.rabbitmqexamples.plain.exchange;
 
-import com.finitess.rabbitmqexamples.common.ChannelProvider;
+import com.finitess.rabbitmqexamples.plain.common.ChannelProvider;
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import org.slf4j.Logger;

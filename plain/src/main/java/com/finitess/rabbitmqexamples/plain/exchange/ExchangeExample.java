@@ -1,7 +1,7 @@
-package com.finitess.rabbitmqexamples.fanout;
+package com.finitess.rabbitmqexamples.plain.exchange;
 
-import com.finitess.rabbitmqexamples.common.ChannelProvider;
-import com.finitess.rabbitmqexamples.common.SingleDeliveryConsumer;
+import com.finitess.rabbitmqexamples.plain.common.ChannelProvider;
+import com.finitess.rabbitmqexamples.plain.common.SingleDeliveryConsumer;
 import com.rabbitmq.client.Channel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

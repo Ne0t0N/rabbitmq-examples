@@ -1,4 +1,4 @@
-package com.finitess.rabbitmqexamples.common;
+package com.finitess.rabbitmqexamples.plain.common;
 
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
