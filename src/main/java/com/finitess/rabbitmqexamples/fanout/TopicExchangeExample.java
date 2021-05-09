@@ -1,7 +1,6 @@
 package com.finitess.rabbitmqexamples.fanout;
 
-import com.finitess.rabbitmqexamples.common.PreconditionUtils;
-import com.finitess.rabbitmqexamples.common.RabbitMqUtils;
+import com.finitess.rabbitmqexamples.common.ChannelProvider;
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import org.slf4j.Logger;
@@ -17,10 +16,16 @@ public class TopicExchangeExample extends ExchangeExample {
     private static final String ROUTING_KEY = "sample.direct.routing.key";
     private static final String ROUTING_KEY_PART = "sample.direct.#";
 
+    private final ChannelProvider channelProvider;
+
+    public TopicExchangeExample(final ChannelProvider channelProvider) {
+        super(channelProvider);
+        this.channelProvider = channelProvider;
+    }
+
     @Override
-    public void produce(String message) {
-        final Channel channel = RabbitMqUtils.createChannel();
-        PreconditionUtils.checkNotNull(channel);
+    public void produce(final String message) throws IOException {
+        final Channel channel = channelProvider.provide();
         try {
             channel.exchangeDeclare(EXCHANGE, BuiltinExchangeType.TOPIC);
             channel.queueDeclare(BOUND_QUEUE, false, false, true, null);
@@ -29,8 +34,6 @@ public class TopicExchangeExample extends ExchangeExample {
             LOG.info("Message '{}' successfully published to exchange '{}' with routingKey '{}'", message, EXCHANGE, ROUTING_KEY);
         } catch (IOException e) {
             LOG.error("Producing message '{}' for channel '{}' failed", message, channel);
-        } finally {
-            RabbitMqUtils.close(channel);
         }
     }
 

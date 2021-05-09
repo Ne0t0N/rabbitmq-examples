@@ -37,7 +37,10 @@ public class SingleDeliveryConsumer extends DefaultConsumer {
     }
 
     public String awaitResult(final long timeout, final TimeUnit timeoutUnit) throws InterruptedException {
-        countDownLatch.await(timeout, timeoutUnit);
-        return result.get();
+        if (countDownLatch.await(timeout, timeoutUnit)) {
+            return result.get();
+        } else {
+            return null;
+        }
     }
 }
