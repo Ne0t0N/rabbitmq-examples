@@ -3,8 +3,8 @@
 ## Steps to run example
 
 1. Start `docker` on your machine
-2. Run `ExchangeExampleTest` class from your IDE of choice (otherwise, you can run `./mvnw clean test` console command
-   from root project folder)
+2. Run tests from your IDE of choice (otherwise, you can run `./mvnw clean test` console command from root project
+   folder)
 
 ## Updating Maven wrapper
 
